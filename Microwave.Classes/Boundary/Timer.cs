@@ -54,12 +54,12 @@ namespace Microwave.Classes.Boundary
 
         public void AddTime()
         {
-            TimeRemaining += 30;
+            TimeRemaining += 60;
         }
 
         public void RemoveTime()
         {
-            TimeRemaining -= 30;
+            TimeRemaining -= 60;
             if (TimeRemaining <= 0)
             {
                 TimeRemaining = 0;
