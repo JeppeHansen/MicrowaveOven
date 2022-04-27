@@ -52,5 +52,19 @@ namespace Microwave.Classes.Boundary
             }
         }
 
+        public void AddTime()
+        {
+            TimeRemaining += 30;
+        }
+
+        public void RemoveTime()
+        {
+            TimeRemaining -= 30;
+            if (TimeRemaining <= 0)
+            {
+                TimeRemaining = 0;
+            }
+        }
+
     }
 }
