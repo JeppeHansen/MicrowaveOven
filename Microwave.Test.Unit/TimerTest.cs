@@ -147,5 +147,35 @@ namespace Microwave.Test.Unit
 
             Assert.That(uut.TimeRemaining, Is.EqualTo(5-ticks*1));
         }
+
+        #region CookingTime feature
+        [TestCase(1,61)]
+        [TestCase(60,120)]
+        [TestCase(0,60)]
+        public void Tick_AddTime_AssertTimeAddedCorrect(int startTime, int newTime)
+        {
+      
+            uut.Start(startTime);
+
+            uut.AddTime();
+
+            Assert.That(uut.TimeRemaining, Is.EqualTo(newTime));
+
+        }
+
+        [TestCase(120,60)]
+        [TestCase(60, 0)]
+        [TestCase(50, 0)]
+
+        public void Tick_RemoveTime_AssertTimeRemovedCorrect(int startTime, int newTime)
+        {
+            uut.Start(startTime);
+
+            uut.RemoveTime();
+
+            Assert.That(uut.TimeRemaining, Is.EqualTo(newTime));
+        }
+        #endregion
+
     }
 }
