@@ -338,7 +338,7 @@ namespace Microwave.Test.Unit
             light.Received(1).TurnOff();
         }
 
-        #region Add and remove cookingTime
+        #region CookingTime feature
         [Test]
         public void Cooking_AddTImeWhilteCooking_AssertTimeAdded()
         {
@@ -377,6 +377,8 @@ namespace Microwave.Test.Unit
             cooker.Received(1).RemoveTime();
 
         }
+
+        
         #endregion
     }
 
