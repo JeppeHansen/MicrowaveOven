@@ -340,7 +340,7 @@ namespace Microwave.Test.Unit
 
         #region CookingTime feature
         [Test]
-        public void Cooking_AddTImeWhilteCooking_AssertTimeAdded()
+        public void Cooking_AddTImeWhilteCooking_TimeAddedCalled()
         {
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Noew in SetPower
@@ -358,15 +358,13 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Cooking_RemoveTimeWhileCooking_AssertTimeRemoved()
+        public void Cooking_RemoveTimeWhileCooking_ReceivedTimeRemoved()
         {
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in SetPower
 
             timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in SetTime
-
-           // timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 
             startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in cooking
@@ -376,6 +374,22 @@ namespace Microwave.Test.Unit
 
             cooker.Received(1).RemoveTime();
 
+        }
+
+        [Test]
+        public void Cooking_RemoveTimeBeforeCooking_TimeRemovedNotCalled()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetPower
+
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetTime
+
+            removeTimeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Remove time before start
+
+            cooker.Received(0).RemoveTime();
+            
         }
 
         

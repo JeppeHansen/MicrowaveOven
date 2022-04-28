@@ -98,7 +98,7 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Cooking_RemovetimeWhileCooking_ReceivedTimeRemoved()
+        public void Cooking_RemovetimeWhileCooking_TimeRemovedCalled()
         {
             uut.StartCooking(50, 60);
 
@@ -106,6 +106,8 @@ namespace Microwave.Test.Unit
 
             timer.Received(1).RemoveTime();
         }
+
+        
 
         
 
