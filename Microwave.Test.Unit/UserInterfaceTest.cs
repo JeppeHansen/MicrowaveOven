@@ -14,6 +14,7 @@ namespace Microwave.Test.Unit
         private IButton powerButton;
         private IButton timeButton;
         private IButton startCancelButton;
+        private IButton removeTimeButton;
 
         private IDoor door;
 
@@ -32,9 +33,11 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
+            removeTimeButton = Substitute.For<IButton>();
 
             uut = new UserInterface(
-                powerButton, timeButton, startCancelButton,
+                powerButton, timeButton, startCancelButton, 
+                removeTimeButton,
                 door,
                 display,
                 light,
@@ -335,7 +338,46 @@ namespace Microwave.Test.Unit
             light.Received(1).TurnOff();
         }
 
+        #region Add and remove cookingTime
+        [Test]
+        public void Cooking_AddTImeWhilteCooking_AssertTimeAdded()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Noew in SetPower
+            
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetTime
+            
+            startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in cooking
+            
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Add time to cooking
 
+            cooker.Received(1).AddTime();
+        }
+
+        [Test]
+        public void Cooking_RemoveTimeWhileCooking_AssertTimeRemoved()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetPower
+
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetTime
+
+           // timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+
+            startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in cooking
+
+            removeTimeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Remove time from cooking
+
+            cooker.Received(1).RemoveTime();
+
+        }
+        #endregion
     }
 
 }
