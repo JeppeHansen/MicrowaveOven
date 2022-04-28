@@ -86,7 +86,7 @@ namespace Microwave.Test.Unit
 
         #region CookingTime feature
         [Test]
-        public void Cooking_AddTimeWhileCooking_AssertTimeAdded()
+        public void Cooking_AddTimeWhileCooking_ReceivedTimeAdded()
         {
 
             uut.StartCooking(50, 60);
@@ -96,6 +96,20 @@ namespace Microwave.Test.Unit
             timer.Received(1).AddTime();
 
         }
+
+        [Test]
+        public void Cooking_RemovetimeWhileCooking_ReceivedTimeRemoved()
+        {
+            uut.StartCooking(50, 60);
+
+            uut.RemoveTime();
+
+            timer.Received(1).RemoveTime();
+        }
+
+        
+
+        
         #endregion
     }
 }
