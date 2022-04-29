@@ -22,11 +22,21 @@ namespace Microwave.App
 
             Light light = new Light(output);
 
+
             Timer timer = new Timer();
 
             CookController cooker = new CookController(timer, display, powerTube);
 
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, powerTube);
+
+            Buzzer buzzer = new Buzzer(output);
+
+            Microwave.Classes.Boundary.Timer timer = new Timer();
+
+            CookController cooker = new CookController(timer, display, powerTube);
+
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
+
 
             // Finish the double association
             cooker.UI = ui;
@@ -42,6 +52,8 @@ namespace Microwave.App
             }
 
             timeButton.Press();
+
+            buzzer.ShortBeep();
 
             startCancelButton.Press();
 

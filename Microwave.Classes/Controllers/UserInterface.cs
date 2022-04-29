@@ -17,6 +17,7 @@ namespace Microwave.Classes.Controllers
         private ICookController myCooker;
         private ILight myLight;
         private IDisplay myDisplay;
+        private IBuzzer myBuzzer;
 
         private IPowerTube myPowerTube; //For config
 
@@ -30,7 +31,12 @@ namespace Microwave.Classes.Controllers
             IDoor door,
             IDisplay display,
             ILight light,
+
             ICookController cooker, IPowerTube powerTube)
+
+            ICookController cooker,
+            IBuzzer buzzer)
+
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
@@ -42,7 +48,11 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
+
             myPowerTube = powerTube;
+
+            myBuzzer = buzzer;
+
         }
 
         private void ResetValues()
@@ -153,7 +163,7 @@ namespace Microwave.Classes.Controllers
                     ResetValues();
                     myDisplay.Clear();
                     myLight.TurnOff();
-                    // Beep 3 times
+                    myBuzzer.ShortBeep();
                     myState = States.READY;
                     break;
             }
