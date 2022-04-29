@@ -13,7 +13,7 @@ namespace Microwave.App
             Button timeButton = new Button();
 
             Door door = new Door();
-
+            //gg
             Output output = new Output();
 
             Display display = new Display(output);
