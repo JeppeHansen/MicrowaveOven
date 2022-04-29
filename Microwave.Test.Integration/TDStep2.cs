@@ -22,9 +22,11 @@ namespace Microwave.Test.Integration
         private Display display;
         private CookController cooker;
 
+
         private IPowerTube powerTube;
         private ITimer timer;
         private IOutput output;
+        private IBuzzer buzzer;
 
         [SetUp]
         public void Setup()
@@ -43,7 +45,7 @@ namespace Microwave.Test.Integration
 
             cooker = new CookController(timer, display, powerTube);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
             cooker.UI = ui;
         }
 
