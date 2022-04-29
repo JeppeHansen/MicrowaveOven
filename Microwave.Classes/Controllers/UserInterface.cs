@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Controllers
@@ -17,6 +18,8 @@ namespace Microwave.Classes.Controllers
         private ILight myLight;
         private IDisplay myDisplay;
 
+        private IPowerTube myPowerTube; //For config
+
         private int powerLevel = 50;
         private int time = 1;
 
@@ -27,7 +30,7 @@ namespace Microwave.Classes.Controllers
             IDoor door,
             IDisplay display,
             ILight light,
-            ICookController cooker)
+            ICookController cooker, IPowerTube powerTube)
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
@@ -39,6 +42,7 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
+            myPowerTube = powerTube;
         }
 
         private void ResetValues()
@@ -56,7 +60,7 @@ namespace Microwave.Classes.Controllers
                     myState = States.SETPOWER;
                     break;
                 case States.SETPOWER:
-                    powerLevel = (powerLevel >= 700 ? 50 : powerLevel+50);
+                    powerLevel = (powerLevel >= myPowerTube._config ? 50 : powerLevel+50); //User can't set power higher than hardware specs. It resets to 50 if that's the case.
                     myDisplay.ShowPower(powerLevel);
                     break;
             }
