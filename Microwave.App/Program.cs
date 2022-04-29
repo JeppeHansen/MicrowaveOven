@@ -18,9 +18,16 @@ namespace Microwave.App
 
             Display display = new Display(output);
 
-            PowerTube powerTube = new PowerTube(output);
+            PowerTube powerTube = new PowerTube(output, 500);
 
             Light light = new Light(output);
+
+
+            Timer timer = new Timer();
+
+            CookController cooker = new CookController(timer, display, powerTube);
+
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, powerTube);
 
             Buzzer buzzer = new Buzzer(output);
 
@@ -30,12 +37,19 @@ namespace Microwave.App
 
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
 
+
             // Finish the double association
             cooker.UI = ui;
 
             // Simulate a simple sequence
 
             powerButton.Press();
+
+            //Demonstration of resetting according to hardware specs
+            for (int i = 0; i < 15; i++)
+            {
+                powerButton.Press();
+            }
 
             timeButton.Press();
 
