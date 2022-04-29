@@ -28,11 +28,11 @@ namespace Microwave.Test.Unit
             output.Received(3);
         }
 
-        [Test]
-        public void Buzzer_OutputCorrect()
-        {
-            uut.ShortBeep();
-            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("Beep!")));
-        }
+        //[Test]
+        //public void Buzzer_OutputCorrect()
+        //{
+        //    uut.ShortBeep();
+        //    output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("Beep!")));
+        //}
     }
 }
