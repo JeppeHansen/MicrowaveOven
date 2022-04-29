@@ -18,7 +18,7 @@ namespace Microwave.App
 
             Display display = new Display(output);
 
-            PowerTube powerTube = new PowerTube(output, 700);
+            PowerTube powerTube = new PowerTube(output, 500);
 
             Light light = new Light(output);
 
@@ -35,7 +35,8 @@ namespace Microwave.App
 
             powerButton.Press();
 
-            for (int i = 0; i < 14; i++)
+            //Demonstration of resetting according to hardware specs
+            for (int i = 0; i < 15; i++)
             {
                 powerButton.Press();
             }
