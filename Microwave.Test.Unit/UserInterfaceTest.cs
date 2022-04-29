@@ -21,6 +21,7 @@ namespace Microwave.Test.Unit
         private ILight light;
 
         private ICookController cooker;
+        private IPowerTube powerTube;
 
         [SetUp]
         public void Setup()
@@ -32,13 +33,15 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
+            powerTube = Substitute.For<IPowerTube>();
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
                 door,
                 display,
                 light,
-                cooker);
+                cooker,
+                powerTube);
         }
 
         [Test]
@@ -73,7 +76,7 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Ready_2PowerButton_PowerIs100()
+        public void Ready_2PowerButton_PowerIs100() //Increases power by 50 each time called
         {
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
@@ -213,7 +216,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
-            for (int i = 50; i <= 700; i += 50)
+            for (int i = 50; i <= uut._config; i += 50)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             }

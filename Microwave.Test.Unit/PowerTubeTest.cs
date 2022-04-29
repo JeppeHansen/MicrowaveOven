@@ -16,7 +16,7 @@ namespace Microwave.Test.Unit
         public void Setup()
         {
             output = Substitute.For<IOutput>();
-            uut = new PowerTube(output);
+            uut = new PowerTube(output, 1000);
         }
 
         [TestCase(1)]
@@ -37,6 +37,8 @@ namespace Microwave.Test.Unit
         [TestCase(750)]
         public void TurnOn_WasOffOutOfRangePower_ThrowsException(int power)
         {
+            uut._config = 700; //Compares to config
+            
             Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(power));
         }
 

@@ -10,7 +10,7 @@ namespace Microwave.Classes.Boundary
         private bool IsOn = false;
 
         //For configuring power tube power wattage 
-        public int _config { get; }
+        public int _config { get; set; }
 
         public PowerTube(IOutput output, int config)
         {
